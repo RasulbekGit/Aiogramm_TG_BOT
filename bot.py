@@ -1,12 +1,9 @@
 import asyncio
-import os
 
 from aiogram import Bot, Dispatcher, F, types
 from aiogram.filters import CommandStart
-from dotenv import load_dotenv
 
-load_dotenv()
-TOKEN = os.getenv("BOT_TOKEN")
+from config import config
 
 dp = Dispatcher()
 
@@ -39,7 +36,7 @@ async def send_message(message: types.Message):
 
 
 async def main():
-    bot = Bot(token=TOKEN)
+    bot = Bot(token=config.bot_token.get_secret_value())
     print("Bot is running...")
     await dp.start_polling(bot)
 
