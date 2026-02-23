@@ -13,7 +13,9 @@ dp = Dispatcher()
 
 @dp.message(CommandStart())
 async def cmd_start(message: types.Message):
-    await message.answer(f"Salem, {message.from_user.full_name}! Bot start aldi.")
+    await message.answer(
+        f"Salem, {message.from_user.full_name}!, {message.from_user.id} Bot start aldi."
+    )
 
 
 @dp.message(F.photo)
@@ -24,6 +26,11 @@ async def send_message_photo(message: types.Message):
 @dp.message(F.text == "hello")
 async def send_message_hi(message: types.Message):
     await message.answer("Hi")
+
+
+@dp.message(F.from_user.id == 922402671 and F.text == "me")
+async def send_message_for_user_id(message: types.Message):
+    await message.answer("Salem sen Rasulsan")
 
 
 @dp.message()
